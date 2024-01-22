@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
-import { fetchCitiesOptions } from '../api/api';
-import { Search } from '../types/Search';
+import { fetchCitiesOptions } from '~/api/api';
+import { Search } from '~/types/Search';
 
 interface SearchBarProps {
   setSelectedCity: (city: Search) => void;

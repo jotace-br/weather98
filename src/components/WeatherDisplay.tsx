@@ -1,8 +1,8 @@
 import useSWR from 'swr';
-import { fetchWeather } from '../api/api';
-import { Search } from '../types/Search';
-import { Daily, IWeather } from '../types/Weather';
-import { formatDtToDate } from '../utils/formatDtToDate';
+import { fetchWeather } from '~/api/api';
+import { Search } from '~/types/Search';
+import { Daily, IWeather } from '~/types/Weather';
+import { formatDtToDate } from '~/utils/formatDtToDate';
 import Loading from './Loading';
 
 interface WeatherDisplayProps {
@@ -78,7 +78,7 @@ const WeatherDisplay = ({
       <p>Description: {weatherData?.current.weather[0].description}</p>
       <p>Humidity: {weatherData?.current.humidity}%</p>
       <p>Wind Speed: {weatherData?.current.wind_speed} m/s</p>
-      <button className='toggle-units-button' onClick={handleUnitsChange}>
+      <button className='bg-black text-white p-2' onClick={handleUnitsChange}>
         Toggle Units
       </button>
 
