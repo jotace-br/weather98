@@ -15,6 +15,10 @@ const Search = () => {
   const handleKeyPress = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       try {
+        if (!searchValue.length) {
+          throw new Error('No geocode information was given.');
+        }
+
         updateSelectedCity(null);
         const results = await fetchCitiesOptions({
           city: searchValue,
@@ -50,7 +54,7 @@ const Search = () => {
           </span>
           <input
             type='text'
-            className='block w-full h-[30px] py-0.5 pr-1 pl-6 text-[0.6875rem] text-textColor leading-6 shadow-input border-2 border-r-white border-b-white bg-white placeholder-gray-500 focus:outline-none focus:border-transparent'
+            className='block w-full h-[30px] py-0.5 pr-1 pl-6 text-[0.6875rem] text-textColor leading-6 shadow-input border-[1.5px] border-r-white border-b-white bg-white placeholder-gray-500 focus:outline-none focus:border-transparent'
             placeholder='Search for location'
             value={searchValue}
             onChange={handleChange}
