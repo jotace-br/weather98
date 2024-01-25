@@ -39,7 +39,7 @@ export const fetchCitiesOptions = async ({
   city,
   unit,
 }: FetchCitiesOptionsProps) => {
-  const URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&units=${unit}&limit=1&appid=${VITE_API_KEY}`;
+  const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&units=${unit}&limit=1&appid=${VITE_API_KEY}`;
   const results = await fetcher<ISearch[]>(URL);
 
   return results;
