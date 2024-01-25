@@ -1,5 +1,7 @@
 ## <p align="center">Weather98 - Retro-styled Weather App</p>
 
+<div align="center">
+
 [![React](https://img.shields.io/badge/React-17.x-blue)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-2.x-success)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue)](https://www.typescriptlang.org/)
@@ -9,6 +11,8 @@
 [![Howler](https://img.shields.io/badge/Howler-2.x-orange)](https://howlerjs.com/)
 [![Recharts](https://img.shields.io/badge/Recharts-2.x-yellowgreen)](https://recharts.org/)
 [![dotenv](https://img.shields.io/badge/dotenv-10.x-lightgrey)](https://www.npmjs.com/package/dotenv)
+
+</div>
 
 ![Weather98 Screenshot](https://i.ibb.co/QYXR5pQ/weather98.png)
 
