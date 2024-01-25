@@ -1,4 +1,4 @@
-export interface Search {
+export interface ISearch {
   name: string;
   local_names?: LocalNames;
   lat: number;
