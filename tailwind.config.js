@@ -33,6 +33,10 @@ export default {
       inside:
         '-1px -1px 0px 0px #DFDFDF inset, 1px 1px 0px 0px #808080 inset, -1px -1px 0px 0px #FFF inset, 1px 1px 0px 0px #0A0A0A inset',
     },
+    borderWidth: {
+      '1px': '1px',
+      '1.5px': '1.5px',
+    },
   },
   plugins: [],
 };

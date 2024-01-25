@@ -63,7 +63,7 @@ const Loading = () => {
           <div className='flex gap-2 mt-1.5 select-none'>
             <input className='hidden' type='checkbox' id='close-dialog' />
             <label className='flex' htmlFor='close-dialog'>
-              <div className='bg-white w-[13px] h-[13px] shadow-checkbox border border-[#808080] border-b-white border-r-white mr-2'></div>
+              <div className='bg-white w-[13px] h-[13px] shadow-checkbox border-1px border-gray2 border-b-white border-r-white mr-2'></div>
               <span className='text-gray-700'>
                 Close this dialog box when download completes
               </span>

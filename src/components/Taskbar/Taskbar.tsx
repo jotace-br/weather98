@@ -57,7 +57,7 @@ const Taskbar = () => {
             </span>
           </button>
 
-          <div className='flex items-center text-nowrap px-2 pt-[2.5px] mr-0.5 border-[1px] border-t-[gray] border-l-[gray] border-r-white border-b-white'>
+          <div className='flex items-center text-nowrap px-2 pt-[2.5px] mr-0.5 border-1px border-t-[gray] border-l-[gray] border-r-white border-b-white'>
             {currentTime}
           </div>
         </div>

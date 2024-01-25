@@ -16,7 +16,7 @@ const Container = ({ children, tailwindStyles = '' }: ContainerProps) => {
       } justify-center w-full`}
     >
       <div
-        className={`container-div w-full h-full p-1 bg-gray shadow-normal border-[1.5px] border-t-white border-l-white text-black cursor-auto sm:w-[525px] ${tailwindStyles}`}
+        className={`container-div w-full h-full p-1 bg-gray shadow-normal border-1.5px border-t-white border-l-white text-black cursor-auto sm:w-[525px] ${tailwindStyles}`}
       >
         {children}
       </div>
