@@ -12,6 +12,10 @@ export default defineConfig({
       include: ['**/*.tsx', '**/*.ts'],
     }),
   ],
+  // define: {
+  //   API_KEY: process.env.VITE_API_KEY,
+  //   API_URL: process.env.VITE_API_URL,
+  // },
   server: {
     watch: {
       usePolling: true,

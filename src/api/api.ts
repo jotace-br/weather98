@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { ISearch } from '~/types/Search';
 import { IWallpaper } from '~/types/Wallpaper';
 import { IWeather } from '~/types/Weather';
-const { VITE_API_KEY, VITE_API_URL } = import.meta.env;
+const { VITE_API_KEY } = import.meta.env;
 
 const fetcher = async <T>(url: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios.get(url);
@@ -24,7 +24,7 @@ export const fetchWeather = async ({
 }: FetchWeatherProps): Promise<IWeather | undefined> => {
   if (!selectedCity) return;
 
-  const URL = `${VITE_API_URL}/onecall?lat=${lat}&lon=${lon}&units=${unit}&cnt=5&exclude=minutely&appid=${VITE_API_KEY}`;
+  const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unit}&cnt=5&exclude=minutely&appid=${VITE_API_KEY}`;
   const result = await fetcher<IWeather>(URL);
 
   return result;
@@ -39,7 +39,7 @@ export const fetchCitiesOptions = async ({
   city,
   unit,
 }: FetchCitiesOptionsProps) => {
-  const URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&units=${unit}&limit=1&appid=${VITE_API_KEY}`;
+  const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&units=${unit}&limit=1&appid=${VITE_API_KEY}`;
   const results = await fetcher<ISearch[]>(URL);
 
   return results;

@@ -19,7 +19,7 @@ const Prompt = ({ message = null, icon = errorIcon, onClick }: ErrorProps) => {
   useLayoutEffect(() => {
     if (message) {
       const sound = new Howl({
-        src: ['src/assets/Sounds/ErrorEffect.mp3'],
+        src: ['./ErrorEffect.mp3'],
       });
       sound.play();
 

@@ -103,7 +103,7 @@ body *::-webkit-scrollbar-corner {
 
 div#root {
   min-width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
 
   height: 100%;
   width: 100%;
@@ -133,4 +133,10 @@ input[type='checkbox']:checked + label > div {
   background-image: url('./Icons/checked.svg');
   background-repeat: no-repeat;
   background-position: center;
+}
+
+@media screen and (min-width: 640px) {
+  div#root {
+    min-height: 100vh;
+  }
 }
