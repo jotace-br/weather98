@@ -1,6 +1,6 @@
 import { Units } from '~/providers/WeatherSettingsProvider';
 
-const getCurrentTempName = (unit: Units) => {
+const GetCurrentTempName = (unit: Units) => {
   switch (unit) {
     case 'imperial':
       return 'Farenheit';
@@ -10,4 +10,4 @@ const getCurrentTempName = (unit: Units) => {
   }
 };
 
-export default getCurrentTempName;
+export default GetCurrentTempName;

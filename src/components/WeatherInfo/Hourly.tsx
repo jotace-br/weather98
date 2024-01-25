@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Graph from '~/components/Graph/Graph';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import { Hourly as IHourly } from '~/types/Weather';
-import formatDtToHour from '~/utils/formatDtToHour';
-import formatTemperature from '~/utils/formatTemperature';
+import FormatDtToHour from '~/utils/FormatDtToHour';
+import FormatTemperature from '~/utils/FormatTemperature';
 
 export interface HourlyProps {
   hourly?: IHourly[];
@@ -29,16 +29,16 @@ const Hourly = ({ hourly }: HourlyProps) => {
 
   useEffect(() => {
     const transformAndUpdate = (data: IHourly): FormattedData => ({
-      name: formatDtToHour(data.dt) || '',
+      name: FormatDtToHour(data.dt) || '',
       temp: Number(updateTemp(data.temp)),
       feel: Number(updateTemp(data.feels_like)),
       desc: data.weather[0]?.description || 'N/A',
     });
 
     const transformWithoutUpdate = (hour: IHourly): FormattedData => ({
-      name: formatDtToHour(hour.dt) || '',
-      temp: formatTemperature(hour.temp),
-      feel: formatTemperature(hour.feels_like),
+      name: FormatDtToHour(hour.dt) || '',
+      temp: FormatTemperature(hour.temp),
+      feel: FormatTemperature(hour.feels_like),
       desc: hour.weather[0]?.description || 'N/A',
     });
 

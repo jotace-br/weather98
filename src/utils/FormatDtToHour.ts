@@ -1,4 +1,4 @@
-const formatDtToHour = (date: number) => {
+const FormatDtToHour = (date: number) => {
   if (!date) return;
 
   return new Date(date * 1000).toLocaleDateString('en', {
@@ -9,4 +9,4 @@ const formatDtToHour = (date: number) => {
   });
 };
 
-export default formatDtToHour;
+export default FormatDtToHour;

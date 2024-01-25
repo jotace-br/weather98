@@ -1,6 +1,6 @@
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
-import formatTemperature from '~/utils/formatTemperature';
-import transformUnitToChar from '~/utils/transformUnitToChar';
+import FormatTemperature from '~/utils/FormatTemperature';
+import TransformUnitToChar from '~/utils/TransformUnitToChar';
 
 export interface CurrentWeatherProps {
   icon?: string;
@@ -29,18 +29,18 @@ const CurrentWeather = ({
 
       <p className='flex select-all'>
         <span className='font-ms-bold text-4xl'>
-          {formatTemperature(temperature)}
+          {FormatTemperature(temperature)}
         </span>
         <span className='font-ms-bold text-lg'>o</span>
         <span className='font-ms-bold text-3xl flex items-end'>
-          {transformUnitToChar(unit)}
+          {TransformUnitToChar(unit)}
         </span>
       </p>
       <div className='w-full flex justify-center text-[1rem] text-textColor select-all'>
-        <span>Feels like {formatTemperature(feelsLike)}</span>
+        <span>Feels like {FormatTemperature(feelsLike)}</span>
 
         <span className='text-xs'>o</span>
-        {transformUnitToChar(unit)}
+        {TransformUnitToChar(unit)}
       </div>
       <p className='text-[1rem] text-textColor'>{description}</p>
     </div>

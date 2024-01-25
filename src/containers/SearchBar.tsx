@@ -4,7 +4,7 @@ import PrimaryBtn from '~/components/Button/PrimaryBtn';
 import Search from '~/components/Input/Search';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import changeUnit from '~/utils/ChangeUnits';
-import getCurrentTempName from '~/utils/getCurrentTempName';
+import GetCurrentTempName from '~/utils/GetCurrentTempName';
 
 const SearchBar = () => {
   const { unit, selectedCity, updateUnit } = useWeatherSettings();
@@ -22,7 +22,7 @@ const SearchBar = () => {
         onClick={handleTempChange}
         hasIcon
         icon={
-          getCurrentTempName(unit) === 'Celsius' ? FarenheitIcon : CelsiusIcon
+          GetCurrentTempName(unit) === 'Celsius' ? FarenheitIcon : CelsiusIcon
         }
       >
         Change to <span className='capitalize'>{changeUnit(unit)}</span>

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import { Daily } from '~/types/Weather';
 import formatDtToDate from '~/utils/FormatDtToDate';
-import formatTemperature from '~/utils/formatTemperature';
-import transformUnitToChar from '~/utils/transformUnitToChar';
+import FormatTemperature from '~/utils/FormatTemperature';
+import TransformUnitToChar from '~/utils/TransformUnitToChar';
 
 export interface ForecastProps {
   daily?: Daily[];
@@ -21,7 +21,7 @@ export const Forecast = ({ daily }: ForecastProps) => {
   const sensitivity = 1.8;
 
   useEffect(() => {
-    const updateTemperatureValues = (dailyData?: Daily[]): Daily[] => {
+    const updateTemperatureValues = (dailyData?: Daily[]) => {
       return (
         (dailyData?.map((data) => ({
           ...data,
@@ -93,8 +93,8 @@ export const Forecast = ({ daily }: ForecastProps) => {
             <p className='font-ms-bold text-textColor font-[0.688rem]'>
               {formatDtToDate(dt)}{' '}
               <span className='font-ms-medium ml-0.5'>
-                ({formatTemperature(temp.min)} / {formatTemperature(temp.max)}°
-                {transformUnitToChar(unit)})
+                ({FormatTemperature(temp.min)} / {FormatTemperature(temp.max)}°
+                {TransformUnitToChar(unit)})
               </span>
             </p>
 
