@@ -7,13 +7,11 @@ import changeUnit from '~/utils/ChangeUnits';
 import getCurrentTempName from '~/utils/getCurrentTempName';
 
 const SearchBar = () => {
-  const { unit, selectedCity, updateUnit, handleUnitChange } =
-    useWeatherSettings();
+  const { unit, selectedCity, updateUnit } = useWeatherSettings();
   const isDisabled = !selectedCity?.name;
 
   const handleTempChange = () => {
     updateUnit(changeUnit(unit));
-    handleUnitChange();
   };
 
   return (
