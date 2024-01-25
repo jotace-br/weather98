@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
-import { IWallpaper } from '~/types/IWallpaper';
 import { ISearch } from '~/types/Search';
+import { IWallpaper } from '~/types/Wallpaper';
 import { IWeather } from '~/types/Weather';
 const { VITE_API_KEY, VITE_API_URL } = import.meta.env;
 
