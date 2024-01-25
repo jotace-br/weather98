@@ -1,13 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import Graph from '~/components/Graph/Graph';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import { Hourly as IHourly } from '~/types/Weather';
 import formatDtToHour from '~/utils/formatDtToHour';
@@ -62,45 +54,7 @@ const Hourly = ({ hourly }: HourlyProps) => {
 
   return (
     <div className='w-full h-full shadow-inside bg-white'>
-      <ResponsiveContainer width='100%' height={250}>
-        <AreaChart
-          width={480}
-          height={250}
-          data={formattedData}
-          margin={{
-            top: 20,
-            left: -25,
-            right: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray='2 2' />
-          <XAxis dataKey='name' />
-          <YAxis />
-          <Tooltip />
-          <Area
-            type='monotone'
-            stackId='1'
-            dataKey='temp'
-            stroke='#808080'
-            fill='#808080'
-          />
-          <Area
-            type='monotone'
-            stackId='1'
-            dataKey='feel'
-            stroke='#121212'
-            fill='#121212'
-          />
-          <Area
-            type='monotone'
-            stackId='1'
-            dataKey='desc'
-            stroke='#008080'
-            fill='#008080'
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+      <Graph data={formattedData} />
     </div>
   );
 };
