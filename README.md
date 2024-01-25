@@ -62,7 +62,6 @@ Before proceeding, ensure you have the following:
 
    ```bash
    VITE_API_KEY='your_awesome_key'
-   VITE_API_URL='https://api.openweathermap.org/data/3.0'
    ```
 
 ## Running the Application
