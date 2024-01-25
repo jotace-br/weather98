@@ -1,4 +1,4 @@
-import { Units } from '~/contexts/WeatherSettingsProvider';
+import { Units } from '~/providers/WeatherSettingsProvider';
 
 const getCurrentTempName = (unit: Units) => {
   switch (unit) {
