@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { fetchWeather } from '~/api/api';
 import { ContentDivider } from '~/components/Divider/ContentDivider';
-import LoadingDiv from '~/components/Loading/Loading';
+import {
+  default as Loading,
+  default as LoadingDiv,
+} from '~/components/Loading/Loading';
 import Prompt from '~/components/Prompt/Prompt';
 import CurrentWeather from '~/components/WeatherInfo/CurrentWeather';
 import { Forecast } from '~/components/WeatherInfo/Forecast';
@@ -75,7 +78,7 @@ const WeatherInfo = () => {
   }
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <div className='mt-4 p-1 max-h-[75dvh] overflow-y-auto'>
         <div>
           <h2 className='text-xl text-center text-balance font-ms-bold'>
@@ -111,7 +114,7 @@ const WeatherInfo = () => {
 
         {error && <Prompt message={error?.message} />}
       </div>
-    </>
+    </Suspense>
   );
 };
 

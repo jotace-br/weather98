@@ -1,5 +1,7 @@
+import { lazy } from 'react';
 import SearchBar from '~/containers/SearchBar';
-import WeatherInfo from '~/containers/WeatherInfo';
+
+const WeatherInfo = lazy(() => import('~/containers/WeatherInfo'));
 
 const Inner = () => {
   return (
