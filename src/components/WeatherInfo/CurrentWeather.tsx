@@ -1,4 +1,5 @@
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
+import formatTemperature from '~/utils/formatTemperature';
 import transformUnitToChar from '~/utils/transformUnitToChar';
 
 export interface CurrentWeatherProps {
@@ -28,9 +29,7 @@ const CurrentWeather = ({
 
       <p className='flex select-all'>
         <span className='font-ms-bold text-4xl'>
-          {isNaN(Number(temperature))
-            ? 'N/A'
-            : String(Math.round(Number(temperature)))}
+          {formatTemperature(temperature)}
         </span>
         <span className='font-ms-bold text-lg'>o</span>
         <span className='font-ms-bold text-3xl flex items-end'>
@@ -38,12 +37,7 @@ const CurrentWeather = ({
         </span>
       </p>
       <div className='w-full flex justify-center text-[1rem] text-textColor select-all'>
-        <span>
-          Feels like{' '}
-          {isNaN(Number(feelsLike))
-            ? 'N/A'
-            : String(Math.round(Number(feelsLike)))}
-        </span>
+        <span>Feels like {formatTemperature(feelsLike)}</span>
 
         <span className='text-xs'>o</span>
         {transformUnitToChar(unit)}
