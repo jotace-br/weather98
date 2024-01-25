@@ -17,13 +17,13 @@ const MoreInformation = ({
     <div className='w-full flex flex-col flex-wrap justify-center gap-2'>
       <section className='w-full'>
         <div className='grid grid-cols-1 grid-rows-2 gap-2 mb-2 sm:grid-cols-2'>
-          <Information label='Pressure' info={`${pressure}hPa`} />
+          <Information label='Pressure' info={`${pressure} hPa`} />
           <Information
             label='Visibility'
-            info={`${(visibility || 1 / 1000).toFixed(1)}Km`}
+            info={`${visibility || 1 / 1000} Km`}
           />
           <Information label='Humidity' info={`${humidity}%`} />
-          <Information label='Wind speed' info={`${windSpeed}m/s`} />
+          <Information label='Wind speed' info={`${windSpeed} m/s`} />
         </div>
       </section>
     </div>
