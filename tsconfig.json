@@ -10,6 +10,7 @@
     "paths": {
       "~/*": ["src/*"]
     },
+    "forceConsistentCasingInFileNames": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
