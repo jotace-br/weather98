@@ -3,24 +3,21 @@ import { HTMLProps, MouseEventHandler, ReactNode } from 'react';
 export interface SmallBtnProps {
   children: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
-  isDisabled?: boolean;
+  isDisabled: boolean;
   tailwindStyles?: HTMLProps<HTMLElement>['className'];
 }
 
 const SmallBtn = ({
   children,
   onClick,
-  isDisabled = false,
+  isDisabled,
   tailwindStyles,
 }: SmallBtnProps) => (
   <button
-    className={`w-4 h-4 bg-gray shadow-normal cursor-pointer flex justify-center place-items-center p-1 border-b-2 border-r-2 active:border-none ${tailwindStyles} ${
-      isDisabled
-        ? 'cursor-not-allowed text-gray2 shadow-none grayscale'
-        : 'cursor-pointer active:shadow-clicked'
-    }`}
+    className={`w-4 h-4 bg-gray shadow-normal cursor-pointer flex justify-center place-items-center p-1 border-b-[1.5px] border-r-[1.5px] active:border-none ${tailwindStyles}`}
     onClick={onClick}
     disabled={isDisabled}
+    style={isDisabled ? { cursor: 'not-allowed' } : { cursor: 'pointer' }}
   >
     <span>{children}</span>
   </button>

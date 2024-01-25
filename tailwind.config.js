@@ -7,6 +7,7 @@ export default {
       'ms-bold': 'Bold, sans-serif',
     },
     colors: {
+      textColor: '#222',
       gray: '#BFBFBF',
       gray2: '#808080',
       header: 'linear-gradient(270deg, #1085D2 0%, #00007B 100%)',

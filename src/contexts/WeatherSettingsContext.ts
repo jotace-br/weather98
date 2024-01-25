@@ -12,6 +12,7 @@ export interface WeatherSettingsContextProps {
   unitValue?: UnitValues;
   updateUnitValue?: (unitValue: UnitValues) => void;
   handleUnitChange: () => void;
+  updateTemp: (value?: number) => number | undefined;
   updateSelectedCity: (city?: ISearch | null) => void;
   updateUnit: (newUnits: Units) => void;
   resetWeatherSettings: () => void;

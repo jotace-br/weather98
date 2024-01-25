@@ -15,6 +15,8 @@ const WeatherSettingsProvider = ({ children }: { children: ReactNode }) => {
   const [unit, setUnit] = useState<Units>('metric');
   const [unitValue, setUnitValue] = useState<UnitValues | undefined>(undefined);
 
+  const formatter = unit === 'metric' ? farenheitToCelsius : celsiusToFarenheit;
+
   const updateSelectedCity = (city?: ISearch | null) => {
     if (city) {
       setSelectedCity(city);
@@ -30,19 +32,18 @@ const WeatherSettingsProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const handleUnitChange = () => {
-    const onSetValue = (formatter: (param?: number) => number | undefined) => {
-      setUnitValue((prevState) => {
-        return {
-          temperature: formatter(prevState?.temperature) ?? 0,
-          feelsLike: formatter(prevState?.feelsLike) ?? 0,
-        };
-      });
-    };
+    setUnitValue((prevState) => {
+      return {
+        temperature: formatter(prevState?.temperature) ?? 0,
+        feelsLike: formatter(prevState?.feelsLike) ?? 0,
+      };
+    });
+  };
 
-    if (unit === 'metric') {
-      return onSetValue(celsiusToFarenheit);
+  const updateTemp = (value?: number) => {
+    if (value) {
+      return formatter(value);
     }
-    return onSetValue(farenheitToCelsius);
   };
 
   const resetWeatherSettings = () => {
@@ -57,6 +58,7 @@ const WeatherSettingsProvider = ({ children }: { children: ReactNode }) => {
     unitValue,
     updateUnitValue,
     handleUnitChange,
+    updateTemp,
     updateSelectedCity,
     updateUnit,
     resetWeatherSettings,
