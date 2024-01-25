@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
-import { Daily } from '~/types/Weather';
+import { IDaily } from '~/types/Weather';
 import formatDtToDate from '~/utils/FormatDtToDate';
 import FormatTemperature from '~/utils/FormatTemperature';
 import TransformUnitToChar from '~/utils/TransformUnitToChar';
 
 export interface ForecastProps {
-  daily?: Daily[];
+  daily?: IDaily[];
 }
 
 export const Forecast = ({ daily }: ForecastProps) => {
   const { unit, updateTemp } = useWeatherSettings();
-  const [formattedDaily, setFormattedDaily] = useState<Daily[] | undefined>(
+  const [formattedDaily, setFormattedDaily] = useState<IDaily[] | undefined>(
     daily
   );
   const containerRef = useRef<HTMLUListElement>(null);
@@ -21,7 +21,7 @@ export const Forecast = ({ daily }: ForecastProps) => {
   const sensitivity = 1.8;
 
   useEffect(() => {
-    const updateTemperatureValues = (dailyData?: Daily[]) => {
+    const updateTemperatureValues = (dailyData?: IDaily[]) => {
       return (
         (dailyData?.map((data) => ({
           ...data,
@@ -29,7 +29,7 @@ export const Forecast = ({ daily }: ForecastProps) => {
             min: Number(updateTemp(data.temp.min)),
             max: Number(updateTemp(data.temp.max)),
           },
-        })) as Daily[]) || []
+        })) as IDaily[]) || []
       );
     };
 
@@ -75,7 +75,7 @@ export const Forecast = ({ daily }: ForecastProps) => {
       ref={containerRef}
       className='scrollable-container select-none flex gap-2 overflow-hidden pb-2'
     >
-      {(formattedDaily ?? []).map(({ dt, temp, weather }: Daily, index) => (
+      {(formattedDaily ?? []).map(({ dt, temp, weather }: IDaily, index) => (
         <li
           key={index}
           onMouseDown={handleMouseDown}

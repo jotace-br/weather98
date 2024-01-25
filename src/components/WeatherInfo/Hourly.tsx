@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Graph from '~/components/Graph/Graph';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
-import { Hourly as IHourly } from '~/types/Weather';
+import { IHourly } from '~/types/Weather';
 import FormatDtToHour from '~/utils/FormatDtToHour';
 import FormatTemperature from '~/utils/FormatTemperature';
 

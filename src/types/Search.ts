@@ -1,13 +1,13 @@
 export interface ISearch {
   name: string;
-  local_names?: LocalNames;
+  local_names?: ILocalNames;
   lat: number;
   lon: number;
   country: string;
   state: string;
 }
 
-export interface LocalNames {
+export interface ILocalNames {
   sr: string;
   kk: string;
   he: string;
