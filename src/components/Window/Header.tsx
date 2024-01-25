@@ -40,7 +40,9 @@ const Header = ({
         ref={draggableTriggerRef}
         className={`w-full h-fit bg-gradient-to-r from-[#00007B] to-[#1085D2] p-0.5 flex justify-between items-center text-center`}
       >
-        <p className='font-ms-bold text-white text-[0.6875rem]'>{title}</p>
+        <p className='text-xs font-ms-bold text-white sm:text-[0.6875rem]'>
+          {title}
+        </p>
         {children ? (
           children
         ) : (

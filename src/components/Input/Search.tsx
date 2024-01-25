@@ -65,7 +65,7 @@ const Search = () => {
             type='text'
             name='city'
             autoComplete='off'
-            className='block w-full h-[30px] py-0.5 pr-1 pl-6 text-[0.6875rem] text-textColor leading-6 shadow-input border-1.5px border-r-white border-b-white bg-white placeholder-gray-500 focus:outline-none focus:border-transparent'
+            className='text-sm block w-full h-[30px] py-0.5 pr-1 pl-6 text-textColor leading-6 shadow-input border-1.5px border-r-white border-b-white bg-white placeholder-gray-500 focus:outline-none focus:border-transparent sm:text-[0.6875rem]'
             placeholder='Search for location'
             value={searchValue}
             onChange={handleChange}

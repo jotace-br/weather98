@@ -36,13 +36,13 @@ const CurrentWeather = ({
           {TransformUnitToChar(unit)}
         </span>
       </p>
-      <div className='w-full flex justify-center text-[1rem] text-textColor select-all'>
+      <div className='w-full flex justify-center text-base text-textColor select-all'>
         <span>Feels like {FormatTemperature(feelsLike)}</span>
 
         <span className='text-xs'>o</span>
         {TransformUnitToChar(unit)}
       </div>
-      <p className='text-[1rem] text-textColor'>{description}</p>
+      <p className='text-base text-textColor'>{description}</p>
     </div>
   );
 };

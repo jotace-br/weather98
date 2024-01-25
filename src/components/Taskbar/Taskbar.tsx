@@ -35,7 +35,7 @@ const Taskbar = () => {
           <div className='h-full w-[3px] shadow-taskbar mx-1'></div>
         </div>
 
-        <div className='w-full flex justify-between text-[0.688rem]'>
+        <div className='text-sm w-full flex justify-between sm:text-[0.688rem]'>
           <button
             onClick={changeButtonState}
             style={buttonStyle}

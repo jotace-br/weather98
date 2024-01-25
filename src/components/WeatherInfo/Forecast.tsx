@@ -90,7 +90,7 @@ export const Forecast = ({ daily }: ForecastProps) => {
           />
 
           <div>
-            <p className='font-ms-bold text-textColor font-[0.688rem]'>
+            <p className='text-sm font-ms-bold text-textColor sm:text-[0.688rem]'>
               {formatDtToDate(dt)}{' '}
               <span className='font-ms-medium ml-0.5'>
                 ({FormatTemperature(temp.min)} / {FormatTemperature(temp.max)}°
@@ -98,7 +98,7 @@ export const Forecast = ({ daily }: ForecastProps) => {
               </span>
             </p>
 
-            <p className='text-textColor font-[0.688rem]'>
+            <p className='text-sm text-textColor sm:text-[0.688rem]'>
               {weather[0].description}
             </p>
           </div>

@@ -39,7 +39,7 @@ const Loading = () => {
           </HeaderActions.Wrapper>
         </Window.Header>
 
-        <div className='flex flex-col p-4 text-[0.688rem] select-text'>
+        <div className='text-sm flex flex-col p-4 select-text sm:text-[0.688rem]'>
           <img src={downloadAnimation} alt='download animation' width='300px' />
           <p className='mt-2'>Saving:</p>
           <p>weather.exe from openweatherapi.org</p>
