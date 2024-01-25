@@ -13,7 +13,7 @@ interface FetchHookState<T> {
   error: Error | null;
 }
 
-const useFetch = <T,>({ fetcher, shouldFetch = false }: UseFetchProps<T>) => {
+const UseFetch = <T,>({ fetcher, shouldFetch = false }: UseFetchProps<T>) => {
   const [state, setState] = useState<FetchHookState<T>>({
     data: null,
     loading: true,
@@ -52,4 +52,4 @@ const useFetch = <T,>({ fetcher, shouldFetch = false }: UseFetchProps<T>) => {
   return state;
 };
 
-export default useFetch;
+export default UseFetch;

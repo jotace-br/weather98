@@ -11,7 +11,7 @@ import { Forecast } from '~/components/WeatherInfo/Forecast';
 import Hourly from '~/components/WeatherInfo/Hourly';
 import MoreInformation from '~/components/WeatherInfo/MoreInformation';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
-import useFetch from '~/hooks/UseFetch';
+import UseFetch from '~/hooks/UseFetch';
 import latinize from '~/utils/Latinize';
 
 type Temperature = {
@@ -32,7 +32,7 @@ const WeatherInfo = () => {
     data: weatherData,
     loading,
     error,
-  } = useFetch({
+  } = UseFetch({
     fetcher: () =>
       fetchWeather({
         selectedCity,
@@ -82,7 +82,7 @@ const WeatherInfo = () => {
       <div className='mt-4 p-1 max-h-[75dvh] overflow-y-auto'>
         <div>
           <h2 className='text-xl text-center text-balance font-ms-bold'>
-            Current weather for {latinize(selectedCity?.name)}
+            Current weather for {latinize(selectedCity.name)}
           </h2>
 
           <div>
@@ -112,7 +112,7 @@ const WeatherInfo = () => {
           </div>
         </div>
 
-        {error && <Prompt message={error?.message} />}
+        {error && <Prompt message={error.message} />}
       </div>
     </Suspense>
   );
