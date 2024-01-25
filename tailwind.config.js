@@ -26,6 +26,8 @@ export default {
         'inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey',
       input:
         '1px 1px 0px 0px #808080 inset, -1px -1px 0px 0px #DFDFDF inset, 1px 1px 0px 0px #0A0A0A inset, -1px -1px 0px 0px #FFF inset',
+      checkbox:
+        '1px 1px 0px 0px #000 inset, -1px -1px 0px 0px #c0c0c0 inset, 1px 1px 0px 0px #808080 inset, -1px -1px 0px 0px #FFF inset',
       taskbar:
         'inset -1px 0 gray, inset -1px 1px #fff, inset -1px -1px gray, inset 0 0 0 1px #fff',
       inside:

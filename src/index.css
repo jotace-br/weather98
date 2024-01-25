@@ -5,11 +5,13 @@
 @font-face {
   font-family: 'Medium';
   src: local('MSSansSerif'), url('./fonts/MSSansSerif.ttf') format('truetype');
+  font-display: swap;
 }
 @font-face {
   font-family: 'Bold';
   src: local('MSSansSerifBold'),
     url('./fonts/MSSansSerifBold.ttf') format('truetype');
+  font-display: swap;
 }
 
 :root {
@@ -125,4 +127,10 @@ div#root {
 
 .scrollable-container:active {
   cursor: grabbing;
+}
+
+input[type='checkbox']:checked + label > div {
+  background-image: url('./checked.svg');
+  background-repeat: no-repeat;
+  background-position: center;
 }

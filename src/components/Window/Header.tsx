@@ -1,7 +1,7 @@
 import { ReactNode, RefObject, useState } from 'react';
+import NavLinkBtn from '~/components/Button/NavLinkBtn';
+import Prompt from '~/components/Prompt/Prompt';
 import useTaskbarContext from '~/contexts/UseTaskbarContext';
-import NavLinkBtn from '../Button/NavLinkBtn';
-import Prompt from '../Prompt/Prompt';
 import HeaderActions from './HeaderActions';
 
 interface HeaderProps {

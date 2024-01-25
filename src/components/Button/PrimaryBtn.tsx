@@ -2,7 +2,7 @@ import { HTMLProps, ReactNode } from 'react';
 
 interface PrimaryBtnProps {
   children: string | ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   isDisabled?: boolean;
   hasIcon?: boolean;
   icon?: string;
@@ -11,7 +11,7 @@ interface PrimaryBtnProps {
 
 const PrimaryBtn = ({
   isDisabled = false,
-  onClick,
+  onClick = () => null,
   hasIcon = false,
   icon,
   children,

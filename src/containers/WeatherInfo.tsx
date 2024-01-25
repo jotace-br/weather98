@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react';
 import { fetchWeather } from '~/api/api';
 import { ContentDivider } from '~/components/Divider/ContentDivider';
+import LoadingDiv from '~/components/Loading/Loading';
 import Prompt from '~/components/Prompt/Prompt';
 import CurrentWeather from '~/components/WeatherInfo/CurrentWeather';
 import { Forecast } from '~/components/WeatherInfo/Forecast';
+import Hourly from '~/components/WeatherInfo/Hourly';
 import MoreInformation from '~/components/WeatherInfo/MoreInformation';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import useFetch from '~/hooks/UseFetch';
 import latinize from '~/utils/Latinize';
 
+type Temperature = {
+  temperature: string | number | undefined;
+  feelsLike: string | number | undefined;
+};
+
 const WeatherInfo = () => {
-  const { selectedCity, unit, unitValue, updateUnitValue } =
-    useWeatherSettings();
+  const { selectedCity, unit, updateTemp } = useWeatherSettings();
+
+  const [temperatures, setTemperatures] = useState<Temperature>();
+
   const [prevSelectedCity, setPrevSelectedCity] = useState(selectedCity);
   const isPrevCityDiffToCurrCity =
     JSON.stringify(selectedCity) !== JSON.stringify(prevSelectedCity);
@@ -33,17 +42,25 @@ const WeatherInfo = () => {
 
   useEffect(() => {
     const updateUnitAndHandleChange = () => {
-      if (weatherData?.current && updateUnitValue) {
-        updateUnitValue({
-          temperature: weatherData?.current.temp,
-          feelsLike: weatherData?.current.feels_like,
-        });
-      }
+      const temperature = {
+        temperature: weatherData?.current.temp,
+        feelsLike: weatherData?.current.feels_like,
+      };
+
+      const temperatureWithUpdate: Temperature = {
+        temperature: updateTemp(weatherData?.current.temp),
+        feelsLike: updateTemp(weatherData?.current.feels_like),
+      };
+
+      setTemperatures((prevData) => {
+        return unit !== 'metric'
+          ? temperatureWithUpdate
+          : temperature || prevData;
+      });
     };
 
     updateUnitAndHandleChange();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [weatherData]);
+  }, [unit, updateTemp, weatherData]);
 
   useEffect(() => {
     setPrevSelectedCity(selectedCity);
@@ -54,7 +71,7 @@ const WeatherInfo = () => {
   }
 
   if (loading || isPrevCityDiffToCurrCity) {
-    return <>loading...</>;
+    return <LoadingDiv />;
   }
 
   return (
@@ -69,8 +86,8 @@ const WeatherInfo = () => {
             <section className='flex flex-wrap items-center justify-center gap-2 sm:flex-nowrap mb-4'>
               <CurrentWeather
                 icon={weatherData?.current.weather[0].icon}
-                temperature={unitValue?.temperature}
-                feelsLike={unitValue?.feelsLike}
+                temperature={temperatures?.temperature}
+                feelsLike={temperatures?.feelsLike}
                 description={weatherData?.current.weather[0].description}
               />
 
@@ -82,8 +99,12 @@ const WeatherInfo = () => {
               />
             </section>
 
-            <ContentDivider title='8 Day Forecast'>
+            <ContentDivider title='8 Day Forecast' tailwindStyles='mb-4'>
               <Forecast daily={weatherData?.daily} />
+            </ContentDivider>
+
+            <ContentDivider title='Hourly' tailwindStyles='mb-4'>
+              <Hourly hourly={weatherData?.hourly} />
             </ContentDivider>
           </div>
         </div>

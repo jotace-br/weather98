@@ -88,7 +88,7 @@ const Draggable = ({ children, triggerRef }: DraggableProps) => {
 
   return (
     <div
-      className='absolute select-none'
+      className='absolute select-none z-50'
       ref={draggableRef}
       style={{
         left: position.x,
