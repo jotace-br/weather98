@@ -7,7 +7,7 @@ interface FrameProps {
 
 const Frame = ({ children, tailwindStyles = '' }: FrameProps) => (
   <div
-    className={`w-full h-full shadow-normal border-[1px] border-b-black border-r-black  border-t-white border-l-white ${tailwindStyles}`}
+    className={`w-full h-full shadow-normal border-1px border-b-black border-r-black  border-t-white border-l-white ${tailwindStyles}`}
   >
     {children}
   </div>

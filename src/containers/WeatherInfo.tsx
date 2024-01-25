@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { fetchWeather } from '~/api/api';
 import { ContentDivider } from '~/components/Divider/ContentDivider';
-import LoadingDiv from '~/components/Loading/Loading';
+import {
+  default as Loading,
+  default as LoadingDiv,
+} from '~/components/Loading/Loading';
 import Prompt from '~/components/Prompt/Prompt';
 import CurrentWeather from '~/components/WeatherInfo/CurrentWeather';
 import { Forecast } from '~/components/WeatherInfo/Forecast';
 import Hourly from '~/components/WeatherInfo/Hourly';
 import MoreInformation from '~/components/WeatherInfo/MoreInformation';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
-import useFetch from '~/hooks/UseFetch';
+import UseFetch from '~/hooks/UseFetch';
 import latinize from '~/utils/Latinize';
 
 type Temperature = {
@@ -17,7 +20,7 @@ type Temperature = {
 };
 
 const WeatherInfo = () => {
-  const { selectedCity, unit, updateTemp } = useWeatherSettings();
+  const { selectedCity, unit, recalculateTemp } = useWeatherSettings();
 
   const [temperatures, setTemperatures] = useState<Temperature>();
 
@@ -29,7 +32,7 @@ const WeatherInfo = () => {
     data: weatherData,
     loading,
     error,
-  } = useFetch({
+  } = UseFetch({
     fetcher: () =>
       fetchWeather({
         selectedCity,
@@ -48,8 +51,8 @@ const WeatherInfo = () => {
       };
 
       const temperatureWithUpdate: Temperature = {
-        temperature: updateTemp(weatherData?.current.temp),
-        feelsLike: updateTemp(weatherData?.current.feels_like),
+        temperature: recalculateTemp(weatherData?.current.temp),
+        feelsLike: recalculateTemp(weatherData?.current.feels_like),
       };
 
       setTemperatures((prevData) => {
@@ -60,7 +63,7 @@ const WeatherInfo = () => {
     };
 
     updateUnitAndHandleChange();
-  }, [unit, updateTemp, weatherData]);
+  }, [unit, recalculateTemp, weatherData]);
 
   useEffect(() => {
     setPrevSelectedCity(selectedCity);
@@ -75,11 +78,11 @@ const WeatherInfo = () => {
   }
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <div className='mt-4 p-1 max-h-[75dvh] overflow-y-auto'>
         <div>
           <h2 className='text-xl text-center text-balance font-ms-bold'>
-            Current weather for {latinize(selectedCity?.name)}
+            Current weather for {latinize(selectedCity.name)}
           </h2>
 
           <div>
@@ -109,9 +112,9 @@ const WeatherInfo = () => {
           </div>
         </div>
 
-        {error && <Prompt message={error?.message} />}
+        {error && <Prompt message={error.message} />}
       </div>
-    </>
+    </Suspense>
   );
 };
 

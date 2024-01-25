@@ -5,7 +5,7 @@ import { ISearch } from '~/types/Search';
 export interface WeatherSettingsContextProps {
   selectedCity: SelectedCity;
   unit: Units;
-  updateTemp: (value?: number) => number | undefined;
+  recalculateTemp: (value?: number) => number | undefined;
   updateSelectedCity: (city?: ISearch | null) => void;
   updateUnit: (newUnits: Units) => void;
   resetWeatherSettings: () => void;

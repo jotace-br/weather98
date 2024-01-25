@@ -26,7 +26,7 @@ const WeatherSettingsProvider = ({ children }: { children: ReactNode }) => {
     setUnit(newUnit);
   };
 
-  const updateTemp = (value?: number) => {
+  const recalculateTemp = (value?: number) => {
     if (value) {
       return formatter(value);
     }
@@ -40,7 +40,7 @@ const WeatherSettingsProvider = ({ children }: { children: ReactNode }) => {
   const contextValue: WeatherSettingsContextProps = {
     selectedCity,
     unit,
-    updateTemp,
+    recalculateTemp,
     updateSelectedCity,
     updateUnit,
     resetWeatherSettings,

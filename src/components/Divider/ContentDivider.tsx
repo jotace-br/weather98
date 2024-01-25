@@ -13,7 +13,9 @@ export const ContentDivider = ({
   tailwindStyles,
 }: ContentDividerProps) => (
   <div className={`flex flex-col gap-y-1 ${tailwindStyles}`}>
-    <h1 className='font-ms-bold font-[0.688rem] text-textColor'>{title}</h1>
+    <h1 className='text-sm font-ms-bold text-textColor sm:text-[0.688rem]'>
+      {title}
+    </h1>
 
     <Divider />
     <div className='w-full h-full'>{children}</div>

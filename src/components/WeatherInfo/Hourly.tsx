@@ -1,17 +1,9 @@
 import { useEffect, useState } from 'react';
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import Graph from '~/components/Graph/Graph';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
-import { Hourly as IHourly } from '~/types/Weather';
-import formatDtToHour from '~/utils/formatDtToHour';
-import formatTemperature from '~/utils/formatTemperature';
+import { IHourly } from '~/types/Weather';
+import FormatDtToHour from '~/utils/FormatDtToHour';
+import FormatTemperature from '~/utils/FormatTemperature';
 
 export interface HourlyProps {
   hourly?: IHourly[];
@@ -30,23 +22,23 @@ const updateTemperatureValues = (
 ): FormattedData[] => hourlyData?.map((data) => transformFn(data)) || [];
 
 const Hourly = ({ hourly }: HourlyProps) => {
-  const { unit, updateTemp } = useWeatherSettings();
+  const { unit, recalculateTemp } = useWeatherSettings();
   const [formattedData, setFormattedData] = useState<
     FormattedData[] | undefined
   >(undefined);
 
   useEffect(() => {
     const transformAndUpdate = (data: IHourly): FormattedData => ({
-      name: formatDtToHour(data.dt) || '',
-      temp: Number(updateTemp(data.temp)),
-      feel: Number(updateTemp(data.feels_like)),
+      name: FormatDtToHour(data.dt) || '',
+      temp: Number(recalculateTemp(data.temp)),
+      feel: Number(recalculateTemp(data.feels_like)),
       desc: data.weather[0]?.description || 'N/A',
     });
 
     const transformWithoutUpdate = (hour: IHourly): FormattedData => ({
-      name: formatDtToHour(hour.dt) || '',
-      temp: formatTemperature(hour.temp),
-      feel: formatTemperature(hour.feels_like),
+      name: FormatDtToHour(hour.dt) || '',
+      temp: FormatTemperature(hour.temp),
+      feel: FormatTemperature(hour.feels_like),
       desc: hour.weather[0]?.description || 'N/A',
     });
 
@@ -58,49 +50,11 @@ const Hourly = ({ hourly }: HourlyProps) => {
 
       return updatedData !== undefined ? updatedData : prevData;
     });
-  }, [hourly, unit, updateTemp]);
+  }, [hourly, unit, recalculateTemp]);
 
   return (
     <div className='w-full h-full shadow-inside bg-white'>
-      <ResponsiveContainer width='100%' height={250}>
-        <AreaChart
-          width={480}
-          height={250}
-          data={formattedData}
-          margin={{
-            top: 20,
-            left: -25,
-            right: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray='2 2' />
-          <XAxis dataKey='name' />
-          <YAxis />
-          <Tooltip />
-          <Area
-            type='monotone'
-            stackId='1'
-            dataKey='temp'
-            stroke='#808080'
-            fill='#808080'
-          />
-          <Area
-            type='monotone'
-            stackId='1'
-            dataKey='feel'
-            stroke='#121212'
-            fill='#121212'
-          />
-          <Area
-            type='monotone'
-            stackId='1'
-            dataKey='desc'
-            stroke='#008080'
-            fill='#008080'
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+      <Graph data={formattedData} />
     </div>
   );
 };

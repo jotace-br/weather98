@@ -35,14 +35,14 @@ const Taskbar = () => {
           <div className='h-full w-[3px] shadow-taskbar mx-1'></div>
         </div>
 
-        <div className='w-full flex justify-between text-[0.688rem]'>
+        <div className='text-sm w-full flex justify-between sm:text-[0.688rem]'>
           <button
             onClick={changeButtonState}
             style={buttonStyle}
             className='bg-[red] relative max-w-[150px] max-h-[23px] overflow-hidden px-0 text-left mr-1 flex-1 basis-auto cursor-pointer'
           >
             <img
-              src='/weather98-icon.png'
+              src='./Icons/weather98-icon.png'
               alt='weather98 icon'
               width='16px'
               height='16px'
@@ -57,7 +57,7 @@ const Taskbar = () => {
             </span>
           </button>
 
-          <div className='flex items-center text-nowrap px-2 pt-[2.5px] mr-0.5 border-[1px] border-t-[gray] border-l-[gray] border-r-white border-b-white'>
+          <div className='flex items-center text-nowrap px-2 pt-[2.5px] mr-0.5 border-1px border-t-[gray] border-l-[gray] border-r-white border-b-white'>
             {currentTime}
           </div>
         </div>

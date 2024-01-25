@@ -59,7 +59,7 @@ const Prompt = ({ message = null, icon = errorIcon, onClick }: ErrorProps) => {
               height='32px'
               className='object-cover'
             />
-            <p className='text-balance text-[0.688rem]'>{message}</p>
+            <p className='text-sm text-balance sm:text-[0.688rem]'>{message}</p>
           </div>
 
           <div className='mt-2 mb-3 flex justify-center'>

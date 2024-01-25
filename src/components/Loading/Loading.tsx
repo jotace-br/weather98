@@ -39,7 +39,7 @@ const Loading = () => {
           </HeaderActions.Wrapper>
         </Window.Header>
 
-        <div className='flex flex-col p-4 text-[0.688rem] select-text'>
+        <div className='text-sm flex flex-col p-4 select-text sm:text-[0.688rem]'>
           <img src={downloadAnimation} alt='download animation' width='300px' />
           <p className='mt-2'>Saving:</p>
           <p>weather.exe from openweatherapi.org</p>
@@ -63,7 +63,7 @@ const Loading = () => {
           <div className='flex gap-2 mt-1.5 select-none'>
             <input className='hidden' type='checkbox' id='close-dialog' />
             <label className='flex' htmlFor='close-dialog'>
-              <div className='bg-white w-[13px] h-[13px] shadow-checkbox border border-[#808080] border-b-white border-r-white mr-2'></div>
+              <div className='bg-white w-[13px] h-[13px] shadow-checkbox border-1px border-gray2 border-b-white border-r-white mr-2'></div>
               <span className='text-gray-700'>
                 Close this dialog box when download completes
               </span>

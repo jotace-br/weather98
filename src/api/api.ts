@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ISearch } from '~/types/Search';
-import { Wallpaper } from '~/types/Wallpaper';
+import { IWallpaper } from '~/types/Wallpaper';
 import { IWeather } from '~/types/Weather';
 const { VITE_API_KEY, VITE_API_URL } = import.meta.env;
 
@@ -48,6 +48,6 @@ export const fetchCitiesOptions = async ({
 export const fetchRandomWallpaper = async () => {
   const URL = `https://api.plaza.one/backgrounds/random`;
 
-  const results = await fetcher<Wallpaper>(URL);
+  const results = await fetcher<IWallpaper>(URL);
   return results;
 };

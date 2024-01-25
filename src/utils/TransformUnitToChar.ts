@@ -1,6 +1,6 @@
 import { Units } from '~/providers/WeatherSettingsProvider';
 
-const transformUnitToChar = (unit: Units) => {
+const TransformUnitToChar = (unit: Units) => {
   if (unit.toLowerCase() === 'metric') {
     return 'C';
   }
@@ -8,4 +8,4 @@ const transformUnitToChar = (unit: Units) => {
   return 'F';
 };
 
-export default transformUnitToChar;
+export default TransformUnitToChar;

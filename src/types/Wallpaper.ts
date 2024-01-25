@@ -1,4 +1,4 @@
-export interface Wallpaper {
+export interface IWallpaper {
   id: number;
   filename: string;
   author: string;
