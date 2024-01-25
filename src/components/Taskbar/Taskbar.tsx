@@ -42,7 +42,7 @@ const Taskbar = () => {
             className='bg-[red] relative max-w-[150px] max-h-[23px] overflow-hidden px-0 text-left mr-1 flex-1 basis-auto cursor-pointer'
           >
             <img
-              src='./Icons/weather98-icon.png'
+              src='./weather98-icon.png'
               alt='weather98 icon'
               width='16px'
               height='16px'
