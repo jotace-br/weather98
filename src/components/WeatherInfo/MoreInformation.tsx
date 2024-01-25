@@ -1,3 +1,5 @@
+import Information from './Information';
+
 export interface MoreInformationProps {
   pressure?: number;
   visibility?: number;
@@ -14,34 +16,14 @@ const MoreInformation = ({
   <div className='w-full flex flex-col flex-wrap items-center gap-2 mr-2'>
     <div className='w-full flex flex-col flex-wrap justify-center gap-2'>
       <section className='w-full'>
-        <div className='grid grid-cols-2 grid-rows-2 gap-2 mb-2'>
-          <div>
-            <p>Pressure: </p>
-            <div className='min-w-[100px] w-full shadow-inside px-2'>
-              <p>{pressure}hPa</p>
-            </div>
-          </div>
-
-          <div>
-            <p>Visibility: </p>
-            <div className='min-w-[100px] w-full shadow-inside px-2'>
-              <p>{(visibility || 1 / 1000).toFixed(1)}Km</p>
-            </div>
-          </div>
-
-          <div>
-            <p>Humidity: </p>
-            <div className='min-w-[100px] w-full shadow-inside px-2'>
-              <p>{humidity}%</p>
-            </div>
-          </div>
-
-          <div>
-            <p>Wind speed: </p>
-            <div className='min-w-[100px] w-full shadow-inside px-2'>
-              <p>{windSpeed}m/s</p>
-            </div>
-          </div>
+        <div className='grid grid-cols-1 grid-rows-2 gap-2 mb-2 sm:grid-cols-2'>
+          <Information label='Pressure' info={`${pressure}hPa`} />
+          <Information
+            label='Visibility'
+            info={`${(visibility || 1 / 1000).toFixed(1)}Km`}
+          />
+          <Information label='Humidity' info={`${humidity}%`} />
+          <Information label='Wind speed' info={`${windSpeed}m/s`} />
         </div>
       </section>
     </div>
