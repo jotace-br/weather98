@@ -22,7 +22,7 @@ const updateTemperatureValues = (
 ): FormattedData[] => hourlyData?.map((data) => transformFn(data)) || [];
 
 const Hourly = ({ hourly }: HourlyProps) => {
-  const { unit, updateTemp } = useWeatherSettings();
+  const { unit, recalculateTemp } = useWeatherSettings();
   const [formattedData, setFormattedData] = useState<
     FormattedData[] | undefined
   >(undefined);
@@ -30,8 +30,8 @@ const Hourly = ({ hourly }: HourlyProps) => {
   useEffect(() => {
     const transformAndUpdate = (data: IHourly): FormattedData => ({
       name: FormatDtToHour(data.dt) || '',
-      temp: Number(updateTemp(data.temp)),
-      feel: Number(updateTemp(data.feels_like)),
+      temp: Number(recalculateTemp(data.temp)),
+      feel: Number(recalculateTemp(data.feels_like)),
       desc: data.weather[0]?.description || 'N/A',
     });
 
@@ -50,7 +50,7 @@ const Hourly = ({ hourly }: HourlyProps) => {
 
       return updatedData !== undefined ? updatedData : prevData;
     });
-  }, [hourly, unit, updateTemp]);
+  }, [hourly, unit, recalculateTemp]);
 
   return (
     <div className='w-full h-full shadow-inside bg-white'>

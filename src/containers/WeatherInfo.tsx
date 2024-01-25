@@ -20,7 +20,7 @@ type Temperature = {
 };
 
 const WeatherInfo = () => {
-  const { selectedCity, unit, updateTemp } = useWeatherSettings();
+  const { selectedCity, unit, recalculateTemp } = useWeatherSettings();
 
   const [temperatures, setTemperatures] = useState<Temperature>();
 
@@ -51,8 +51,8 @@ const WeatherInfo = () => {
       };
 
       const temperatureWithUpdate: Temperature = {
-        temperature: updateTemp(weatherData?.current.temp),
-        feelsLike: updateTemp(weatherData?.current.feels_like),
+        temperature: recalculateTemp(weatherData?.current.temp),
+        feelsLike: recalculateTemp(weatherData?.current.feels_like),
       };
 
       setTemperatures((prevData) => {
@@ -63,7 +63,7 @@ const WeatherInfo = () => {
     };
 
     updateUnitAndHandleChange();
-  }, [unit, updateTemp, weatherData]);
+  }, [unit, recalculateTemp, weatherData]);
 
   useEffect(() => {
     setPrevSelectedCity(selectedCity);

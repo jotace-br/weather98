@@ -10,7 +10,7 @@ export interface ForecastProps {
 }
 
 export const Forecast = ({ daily }: ForecastProps) => {
-  const { unit, updateTemp } = useWeatherSettings();
+  const { unit, recalculateTemp } = useWeatherSettings();
   const [formattedDaily, setFormattedDaily] = useState<IDaily[] | undefined>(
     daily
   );
@@ -26,8 +26,8 @@ export const Forecast = ({ daily }: ForecastProps) => {
         (dailyData?.map((data) => ({
           ...data,
           temp: {
-            min: Number(updateTemp(data.temp.min)),
-            max: Number(updateTemp(data.temp.max)),
+            min: Number(recalculateTemp(data.temp.min)),
+            max: Number(recalculateTemp(data.temp.max)),
           },
         })) as IDaily[]) || []
       );
@@ -38,7 +38,7 @@ export const Forecast = ({ daily }: ForecastProps) => {
         unit !== 'metric' ? updateTemperatureValues(daily) : daily || [];
       return updatedDaily ?? prevDaily;
     });
-  }, [daily, unit, updateTemp]);
+  }, [daily, unit, recalculateTemp]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
