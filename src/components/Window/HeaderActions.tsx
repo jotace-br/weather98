@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import CloseIcon from '~/assets/Icons/CloseIcon';
 import MaximizeIcon from '~/assets/Icons/MaximizeIcon';
 import MinimizeIcon from '~/assets/Icons/MinimizeIcon';
-import SmallBtn from '../Button/SmallBtn';
+import SmallBtn from '~/components/Button/SmallBtn';
 
 interface HeaderActionsWrapperProps {
   children: ReactNode;

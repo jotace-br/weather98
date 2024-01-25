@@ -1,10 +1,10 @@
 import { Howl } from 'howler';
 import { useLayoutEffect, useRef, useState } from 'react';
 import errorIcon from '~/assets/Icons/ErrorIcon.png';
+import PrimaryBtn from '~/components/Button/PrimaryBtn';
+import Draggable from '~/components/Draggable/Draggable';
 import Window from '~/components/Window';
-import PrimaryBtn from '../Button/PrimaryBtn';
-import Draggable from '../Draggable/Draggable';
-import HeaderActions from '../Window/HeaderActions';
+import HeaderActions from '~/components/Window/HeaderActions';
 
 export interface ErrorProps {
   message: string | null;

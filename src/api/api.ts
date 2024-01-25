@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
+import { ISearch } from '~/types/Search';
 import { Wallpaper } from '~/types/Wallpaper';
-import { ISearch } from '../types/Search';
-import { IWeather } from '../types/Weather';
+import { IWeather } from '~/types/Weather';
 const { VITE_API_KEY, VITE_API_URL } = import.meta.env;
 
 const fetcher = async <T>(url: string): Promise<T> => {
