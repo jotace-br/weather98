@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { fetchWeather } from '~/api/api';
+import { ContentDivider } from '~/components/Divider/ContentDivider';
 import Prompt from '~/components/Prompt/Prompt';
 import CurrentWeather from '~/components/WeatherInfo/CurrentWeather';
+import { Forecast } from '~/components/WeatherInfo/Forecast';
 import MoreInformation from '~/components/WeatherInfo/MoreInformation';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import useFetch from '~/hooks/UseFetch';
-import { Daily } from '~/types/Weather';
-import formatDtToDate from '~/utils/FormatDtToDate';
 import latinize from '~/utils/Latinize';
 
 const WeatherInfo = () => {
@@ -59,14 +59,14 @@ const WeatherInfo = () => {
 
   return (
     <>
-      <div className='mt-4 p-1 h-[75dvh] overflow-y-auto'>
+      <div className='mt-4 p-1 max-h-[75dvh] overflow-y-auto'>
         <div>
           <h2 className='text-xl text-center text-balance font-ms-bold'>
             Current weather for {latinize(selectedCity?.name)}
           </h2>
 
           <div>
-            <section className='flex flex-wrap items-center justify-center gap-2 sm:flex-nowrap'>
+            <section className='flex flex-wrap items-center justify-center gap-2 sm:flex-nowrap mb-4'>
               <CurrentWeather
                 icon={weatherData?.current.weather[0].icon}
                 temperature={unitValue?.temperature}
@@ -82,22 +82,9 @@ const WeatherInfo = () => {
               />
             </section>
 
-            <br />
-            <h1>8 DAY FORECAST</h1>
-            <ul>
-              {(weatherData?.daily || []).map(
-                ({ dt, temp, weather }: Daily, index) => (
-                  <li key={index}>
-                    <p>{formatDtToDate(dt)}</p>
-                    <p>
-                      {weather[0].icon} {temp.min} / {temp.max}°
-                      {unit.toUpperCase()}
-                    </p>
-                    <p>{weather[0].description}</p>
-                  </li>
-                )
-              )}
-            </ul>
+            <ContentDivider title='8 Day Forecast'>
+              <Forecast daily={weatherData?.daily} />
+            </ContentDivider>
           </div>
         </div>
 
