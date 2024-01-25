@@ -6,7 +6,7 @@ export interface NavLinkBtnProps {
 const NavLinkBtn = ({ text, onClick = () => {} }: NavLinkBtnProps) => (
   <button
     onClick={onClick}
-    className='text-[0.6875rem] cursor-pointer p-1 hover:shadow-hover active:shadow-clicked'
+    className='text-[0.6875rem] text-textColor cursor-pointer p-1 hover:shadow-hover active:shadow-clicked'
   >
     <span className='underline'>{text[0]}</span>
     {text.slice(1)}
