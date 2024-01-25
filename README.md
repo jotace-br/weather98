@@ -61,7 +61,7 @@ Before proceeding, ensure you have the following:
    VITE_API_URL='https://api.openweathermap.org/data/3.0'
    ```
 
-### Running the Application
+## Running the Application
 
 4. Start the development server:
 
@@ -71,11 +71,7 @@ Before proceeding, ensure you have the following:
 
    This will launch the application locally. Open your browser and visit `http://localhost:5173` to view Weather98.
 
-### Assumptions
-
-- Node.js and yarn are already installed on your machine.
-
-### Process and Choices
+## Process and Choices
 
 Weather98 was developed with the following considerations:
 
@@ -134,4 +130,4 @@ Make sure to create a `.env` file in the root of your project and add the follow
 
 Feel free to explore and contribute to the project. If you encounter any issues or have suggestions, please open an issue or submit a pull request.
 
-Enjoy the retro vibes with Weather98!
+### <p align="center">Enjoy the retro vibes with Weather98!<p>
