@@ -12,21 +12,22 @@ import Hourly from '~/components/WeatherInfo/Hourly';
 import MoreInformation from '~/components/WeatherInfo/MoreInformation';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import UseFetch from '~/hooks/UseFetch';
+import { IWeather } from '~/types/Weather';
 import latinize from '~/utils/Latinize';
-
-type Temperature = {
-  temperature: string | number | undefined;
-  feelsLike: string | number | undefined;
-};
 
 const WeatherInfo = () => {
   const { selectedCity, unit, recalculateTemp } = useWeatherSettings();
 
-  const [temperatures, setTemperatures] = useState<Temperature>();
-
   const [prevSelectedCity, setPrevSelectedCity] = useState(selectedCity);
+  const [prevUnit, setPrevUnit] = useState(unit);
+
+  const [formattedData, setFormattedData] = useState<IWeather | undefined>(
+    undefined
+  );
+
   const isPrevCityDiffToCurrCity =
     JSON.stringify(selectedCity) !== JSON.stringify(prevSelectedCity);
+  const shouldFetch = isPrevCityDiffToCurrCity;
 
   const {
     data: weatherData,
@@ -40,34 +41,54 @@ const WeatherInfo = () => {
         lon: selectedCity?.lon,
         unit,
       }),
-    shouldFetch: isPrevCityDiffToCurrCity,
+    shouldFetch: shouldFetch,
   });
 
   useEffect(() => {
-    const updateUnitAndHandleChange = () => {
-      const temperature = {
-        temperature: weatherData?.current.temp,
-        feelsLike: weatherData?.current.feels_like,
-      };
+    setPrevUnit(unit);
+  }, [unit]);
 
-      const temperatureWithUpdate: Temperature = {
-        temperature: recalculateTemp(weatherData?.current.temp),
-        feelsLike: recalculateTemp(weatherData?.current.feels_like),
-      };
-
-      setTemperatures((prevData) => {
-        return unit !== 'metric'
-          ? temperatureWithUpdate
-          : temperature || prevData;
+  useEffect(() => {
+    // Update local temperatures when the unit changes
+    if (unit !== prevUnit && formattedData) {
+      setFormattedData({
+        ...formattedData,
+        current: {
+          ...formattedData.current,
+          temp: recalculateTemp(formattedData.current.temp),
+          feels_like: recalculateTemp(formattedData.current.feels_like),
+        },
+        daily: [
+          ...formattedData.daily.map((day) => ({
+            ...day,
+            temp: {
+              ...day.temp,
+              min: recalculateTemp(day.temp.min),
+              max: recalculateTemp(day.temp.max),
+            },
+          })),
+        ],
+        hourly: [
+          ...formattedData.hourly.map((hour) => ({
+            ...hour,
+            temp: recalculateTemp(hour.temp),
+            feels_like: recalculateTemp(hour.feels_like),
+          })),
+        ],
       });
-    };
-
-    updateUnitAndHandleChange();
-  }, [unit, recalculateTemp, weatherData]);
+    }
+  }, [unit, prevUnit, recalculateTemp, formattedData]);
 
   useEffect(() => {
     setPrevSelectedCity(selectedCity);
   }, [selectedCity]);
+
+  useEffect(() => {
+    // Update temperatures when weatherData changes
+    if (weatherData) {
+      setFormattedData(weatherData);
+    }
+  }, [weatherData]);
 
   if (!selectedCity) {
     return;
@@ -88,26 +109,26 @@ const WeatherInfo = () => {
           <div>
             <section className='flex flex-wrap items-center justify-center gap-2 sm:flex-nowrap mb-4'>
               <CurrentWeather
-                icon={weatherData?.current.weather[0].icon}
-                temperature={temperatures?.temperature}
-                feelsLike={temperatures?.feelsLike}
-                description={weatherData?.current.weather[0].description}
+                icon={formattedData?.current.weather[0].icon}
+                temperature={formattedData?.current.temp}
+                feelsLike={formattedData?.current.feels_like}
+                description={formattedData?.current.weather[0].description}
               />
 
               <MoreInformation
-                pressure={weatherData?.current.pressure}
-                visibility={weatherData?.current.visibility}
-                humidity={weatherData?.current.humidity}
-                windSpeed={weatherData?.current.wind_speed}
+                pressure={formattedData?.current.pressure}
+                visibility={formattedData?.current.visibility}
+                humidity={formattedData?.current.humidity}
+                windSpeed={formattedData?.current.wind_speed}
               />
             </section>
 
             <ContentDivider title='8 Day Forecast' tailwindStyles='mb-4'>
-              <Forecast daily={weatherData?.daily} />
+              <Forecast daily={formattedData?.daily} />
             </ContentDivider>
 
             <ContentDivider title='Hourly' tailwindStyles='mb-4'>
-              <Hourly hourly={weatherData?.hourly} />
+              <Hourly hourly={formattedData?.hourly} />
             </ContentDivider>
           </div>
         </div>

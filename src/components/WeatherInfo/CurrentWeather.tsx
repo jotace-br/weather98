@@ -1,7 +1,7 @@
+import WeatherIcon from '~/assets/Icons/WeatherIcon';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import FormatTemperature from '~/utils/FormatTemperature';
 import TransformUnitToChar from '~/utils/TransformUnitToChar';
-
 export interface CurrentWeatherProps {
   icon?: string;
   temperature?: number | string;
@@ -19,13 +19,7 @@ const CurrentWeather = ({
 
   return (
     <div className='w-full flex flex-wrap flex-col items-center sm:w-[50%]'>
-      <img
-        src={`https://openweathermap.org/img/w/${icon}.png`}
-        alt='weather icon'
-        width='50px'
-        height='50px'
-        className='object-cover w-[50px] h-[50px] sm:w-[75px] sm:h-[75px] saturate-[5]'
-      />
+      <WeatherIcon icon={icon} />
 
       <p className='flex select-all'>
         <span className='font-ms-bold text-4xl'>

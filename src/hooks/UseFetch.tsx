@@ -27,8 +27,11 @@ const UseFetch = <T,>({ fetcher, shouldFetch = false }: UseFetchProps<T>) => {
       if (
         !shouldFetch ||
         (hasFetched.current && fetcher === prevFetcher.current)
-      )
+      ) {
         return;
+      }
+
+      setState({ data: null, loading: true, error: null });
 
       try {
         const data = await fetcher();
