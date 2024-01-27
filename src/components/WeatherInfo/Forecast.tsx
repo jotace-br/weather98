@@ -1,44 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
+import WeatherIcon from '~/assets/Icons/WeatherIcon';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import { IDaily } from '~/types/Weather';
 import formatDtToDate from '~/utils/FormatDtToDate';
 import FormatTemperature from '~/utils/FormatTemperature';
 import TransformUnitToChar from '~/utils/TransformUnitToChar';
-
-export interface ForecastProps {
+interface ForecastProps {
   daily?: IDaily[];
 }
-
 export const Forecast = ({ daily }: ForecastProps) => {
-  const { unit, recalculateTemp } = useWeatherSettings();
-  const [formattedDaily, setFormattedDaily] = useState<IDaily[] | undefined>(
-    daily
-  );
+  const { unit } = useWeatherSettings();
   const containerRef = useRef<HTMLUListElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const sensitivity = 1.8;
-
-  useEffect(() => {
-    const updateTemperatureValues = (dailyData?: IDaily[]) => {
-      return (
-        (dailyData?.map((data) => ({
-          ...data,
-          temp: {
-            min: Number(recalculateTemp(data.temp.min)),
-            max: Number(recalculateTemp(data.temp.max)),
-          },
-        })) as IDaily[]) || []
-      );
-    };
-
-    setFormattedDaily((prevDaily) => {
-      const updatedDaily =
-        unit !== 'metric' ? updateTemperatureValues(daily) : daily || [];
-      return updatedDaily ?? prevDaily;
-    });
-  }, [daily, unit, recalculateTemp]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -75,19 +51,13 @@ export const Forecast = ({ daily }: ForecastProps) => {
       ref={containerRef}
       className='scrollable-container select-none flex gap-2 overflow-hidden pb-2'
     >
-      {(formattedDaily ?? []).map(({ dt, temp, weather }: IDaily, index) => (
+      {(daily || []).map(({ dt, temp, weather }: IDaily, index: number) => (
         <li
           key={index}
           onMouseDown={handleMouseDown}
-          className='min-w-fit flex items-center gap-2 py-1.5 px-3 shadow-normal border-[1px] border-b-black border-r-black  border-t-white border-l-white'
+          className='min-w-fit flex items-center gap-1 py-1.5 px-3 shadow-normal border-[1px] border-b-black border-r-black  border-t-white border-l-white'
         >
-          <img
-            src={`https://openweathermap.org/img/w/${weather[0].icon}.png`}
-            alt='weather icon'
-            width='32px'
-            height='32px'
-            className='w-[32px] h-[32px] object-cover'
-          />
+          <WeatherIcon icon={weather[0].icon} />
 
           <div>
             <p className='text-sm font-ms-bold text-textColor sm:text-[0.688rem]'>

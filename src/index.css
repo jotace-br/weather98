@@ -76,19 +76,19 @@ body *::-webkit-scrollbar-button:single-button:vertical:increment {
 }
 
 body *::-webkit-scrollbar-button:single-button:vertical:decrement {
-  background-image: url('./Icons/button-up.svg');
+  background-image: url('/Icons/button-up.svg');
 }
 
 body *::-webkit-scrollbar-button:single-button:vertical:increment {
-  background-image: url('./Icons/button-down.svg');
+  background-image: url('/Icons/button-down.svg');
 }
 
 body *::-webkit-scrollbar-button:single-button:horizontal:decrement {
-  background-image: url('./Icons/button-left.svg');
+  background-image: url('/Icons/button-left.svg');
 }
 
 body *::-webkit-scrollbar-button:single-button:horizontal:increment {
-  background-image: url('./Icons/button-right.svg');
+  background-image: url('/Icons/button-right.svg');
 }
 
 body *::-webkit-scrollbar-button:active {
@@ -130,7 +130,7 @@ div#root {
 }
 
 input[type='checkbox']:checked + label > div {
-  background-image: url('./Icons/checked.svg');
+  background-image: url('/Icons/checked.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
