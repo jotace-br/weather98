@@ -6,6 +6,10 @@ const latinize = (
   str: string,
   characters: CharacterMap = latinizeCharacters
 ) => {
+  if (str === undefined) {
+    return undefined;
+  }
+
   return str.replace(/[^A-Za-z0-9]/g, function (x: string) {
     return characters[x] || x;
   });

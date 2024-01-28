@@ -3,7 +3,7 @@ import FarenheitIcon from '~/assets/Icons/FarenheitIcon.png';
 import PrimaryBtn from '~/components/Button/PrimaryBtn';
 import Search from '~/components/Input/Search';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
-import changeUnit from '~/utils/ChangeUnits';
+import changeUnit from '~/utils/ChangeUnit';
 import GetCurrentTempName from '~/utils/GetCurrentTempName';
 
 const SearchBar = () => {
