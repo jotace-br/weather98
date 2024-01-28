@@ -4,9 +4,10 @@ export interface IWeather {
   timezone: string;
   timezone_offset: number;
   current: ICurrent;
-  minutely: IMinutely[];
-  hourly: IHourly[];
-  daily: IDaily[];
+  minutely?: IMinutely[];
+  hourly?: IHourly[];
+  daily?: IDaily[];
+  alerts?: IAlert[];
 }
 
 export interface ICurrent {
@@ -18,6 +19,7 @@ export interface ICurrent {
   pressure: number;
   humidity: number;
   dew_point: number;
+  wind_gust?: number;
   uvi: number;
   clouds: number;
   visibility: number;
@@ -75,6 +77,7 @@ export interface IDaily {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
+  summary?: string;
   weather: ICurrentWeather[];
   clouds: number;
   pop: number;
@@ -96,4 +99,13 @@ export interface IFeelsLike {
   night: number;
   eve: number;
   morn: number;
+}
+
+export interface IAlert {
+  sender_name: string;
+  event: string;
+  start: number;
+  end: number;
+  description: string;
+  tags: string[];
 }
