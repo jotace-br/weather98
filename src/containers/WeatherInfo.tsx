@@ -59,7 +59,7 @@ const WeatherInfo = () => {
           feels_like: recalculateTemp(formattedData.current.feels_like),
         },
         daily: [
-          ...formattedData.daily.map((day) => ({
+          ...(formattedData.daily || []).map((day) => ({
             ...day,
             temp: {
               ...day.temp,
@@ -69,7 +69,7 @@ const WeatherInfo = () => {
           })),
         ],
         hourly: [
-          ...formattedData.hourly.map((hour) => ({
+          ...(formattedData.hourly || []).map((hour) => ({
             ...hour,
             temp: recalculateTemp(hour.temp),
             feels_like: recalculateTemp(hour.feels_like),
