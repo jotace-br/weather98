@@ -1,0 +1,22 @@
+{
+  "header": {
+    "file": "File",
+    "edit": "Edit",
+    "changeLang": "Change Language",
+    "help": "Help"
+  },
+  "searchContainer": {
+    "placeholder": "Search for Location",
+    "changeTo": "Change to {{unit}}"
+  },
+  "weatherInfo": {
+    "currentFor": "Current weather for {{city}}",
+    "feelsLike": "Feels like {{temperature}}",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "forecast": "{{totalDays}} Day Forecast",
+    "hourly": "Hourly"
+  }
+}

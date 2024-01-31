@@ -1,0 +1,22 @@
+{
+  "header": {
+    "file": "Arquivo",
+    "edit": "Editar",
+    "changeLang": "Mudar Idioma",
+    "help": "Ajuda"
+  },
+  "searchContainer": {
+    "placeholder": "Digite um nome de cidade",
+    "changeTo": "Mudar p/{{unit}}"
+  },
+  "weatherInfo": {
+    "currentFor": "Clima atual para {{city}}",
+    "feelsLike": "Sensação térmica {{temperature}}",
+    "pressure": "Pressao",
+    "visibility": "Visibilidade",
+    "humidity": "Umidade",
+    "wind": "Vento",
+    "forecast": "Previsão de {{totalDays}} dias",
+    "hourly": "De hora em hora"
+  }
+}

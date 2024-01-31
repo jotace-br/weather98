@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { fetchRandomWallpaper } from '~/api/api';
 import Prompt from '~/components/Prompt/Prompt';
 import Taskbar from '~/components/Taskbar/Taskbar';
@@ -7,6 +7,20 @@ import Window from '~/components/Window';
 function App() {
   const [error, setError] = useState<string | null>(null);
   const initialized = useRef(false);
+
+  useLayoutEffect(() => {
+    const sound = new Howl({
+      src: ['./Startup.mp3'],
+      volume: 0.1,
+    });
+    sound.play();
+
+    const cleanup = () => {
+      sound.unload();
+    };
+
+    return cleanup;
+  }, []);
 
   useEffect(() => {
     const getRandomWallpaper = async () => {
