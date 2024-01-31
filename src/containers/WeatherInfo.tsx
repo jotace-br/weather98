@@ -1,4 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { fetchWeather } from '~/api/api';
 import { ContentDivider } from '~/components/Divider/ContentDivider';
 import {
@@ -15,8 +16,46 @@ import UseFetch from '~/hooks/UseFetch';
 import { IWeather } from '~/types/Weather';
 import latinize from '~/utils/Latinize';
 
+const formatWeatherData = (
+  data: IWeather,
+  options?: {
+    recalculateTemp: (value: number) => number;
+  }
+) => {
+  const handleRecaulateTemp = (value: number) =>
+    options?.recalculateTemp(value) ?? value;
+
+  return {
+    ...data,
+    current: {
+      ...data.current,
+      temp: handleRecaulateTemp(data.current.temp),
+      feels_like: handleRecaulateTemp(data.current.feels_like),
+    },
+    daily: [
+      ...(data.daily || []).map((day) => ({
+        ...day,
+        temp: {
+          ...day.temp,
+          min: handleRecaulateTemp(day.temp.min),
+          max: handleRecaulateTemp(day.temp.max),
+        },
+      })),
+    ],
+    hourly: [
+      ...(data.hourly || []).map((hour) => ({
+        ...hour,
+        temp: handleRecaulateTemp(hour.temp),
+        feels_like: handleRecaulateTemp(hour.feels_like),
+      })),
+    ],
+  };
+};
+
 const WeatherInfo = () => {
-  const { selectedCity, unit, recalculateTemp } = useWeatherSettings();
+  const { language, selectedCity, unit, recalculateTemp } =
+    useWeatherSettings();
+  const { t } = useTranslation();
 
   const [prevSelectedCity, setPrevSelectedCity] = useState(selectedCity);
   const [prevUnit, setPrevUnit] = useState(unit);
@@ -25,9 +64,20 @@ const WeatherInfo = () => {
     undefined
   );
 
+  const [prevLanguage, setPrevLanguage] = useState<string | null>(
+    localStorage.getItem('i18nextLng')
+  );
   const isPrevCityDiffToCurrCity =
     JSON.stringify(selectedCity) !== JSON.stringify(prevSelectedCity);
-  const shouldFetch = isPrevCityDiffToCurrCity;
+  const isPrevLanguageDiffToCurrLanguage = prevLanguage !== language;
+
+  const shouldFetch =
+    selectedCity &&
+    (isPrevCityDiffToCurrCity || isPrevLanguageDiffToCurrLanguage);
+
+  useEffect(() => {
+    setPrevLanguage(language);
+  }, [language]);
 
   const {
     data: weatherData,
@@ -40,8 +90,9 @@ const WeatherInfo = () => {
         lat: selectedCity?.lat,
         lon: selectedCity?.lon,
         unit,
+        lang: language,
       }),
-    shouldFetch: shouldFetch,
+    shouldFetch: shouldFetch || false,
   });
 
   useEffect(() => {
@@ -51,31 +102,7 @@ const WeatherInfo = () => {
   useEffect(() => {
     // Update local temperatures when the unit changes
     if (unit !== prevUnit && formattedData) {
-      setFormattedData({
-        ...formattedData,
-        current: {
-          ...formattedData.current,
-          temp: recalculateTemp(formattedData.current.temp),
-          feels_like: recalculateTemp(formattedData.current.feels_like),
-        },
-        daily: [
-          ...(formattedData.daily || []).map((day) => ({
-            ...day,
-            temp: {
-              ...day.temp,
-              min: recalculateTemp(day.temp.min),
-              max: recalculateTemp(day.temp.max),
-            },
-          })),
-        ],
-        hourly: [
-          ...(formattedData.hourly || []).map((hour) => ({
-            ...hour,
-            temp: recalculateTemp(hour.temp),
-            feels_like: recalculateTemp(hour.feels_like),
-          })),
-        ],
-      });
+      setFormattedData(formatWeatherData(formattedData, { recalculateTemp }));
     }
   }, [unit, prevUnit, recalculateTemp, formattedData]);
 
@@ -103,7 +130,9 @@ const WeatherInfo = () => {
       <div className='mt-4 p-1 max-h-[75dvh] overflow-y-auto'>
         <div>
           <h2 className='text-xl text-center text-balance font-ms-bold'>
-            Current weather for {latinize(selectedCity.name)}
+            {t('weatherInfo.currentFor', {
+              city: latinize(selectedCity.name),
+            })}
           </h2>
 
           <div>
@@ -123,11 +152,19 @@ const WeatherInfo = () => {
               />
             </section>
 
-            <ContentDivider title='8 Day Forecast' tailwindStyles='mb-4'>
+            <ContentDivider
+              title={t('weatherInfo.forecast', {
+                totalDays: formattedData?.daily?.length ?? 0,
+              })}
+              tailwindStyles='mb-4'
+            >
               <Forecast daily={formattedData?.daily} />
             </ContentDivider>
 
-            <ContentDivider title='Hourly' tailwindStyles='mb-4'>
+            <ContentDivider
+              title={t('weatherInfo.hourly')}
+              tailwindStyles='mb-4'
+            >
               <Hourly hourly={formattedData?.hourly} />
             </ContentDivider>
           </div>
