@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import WeatherIcon from '~/assets/Icons/WeatherIcon';
 import useWeatherSettings from '~/contexts/UseWeatherSettings';
 import FormatTemperature from '~/utils/FormatTemperature';
@@ -16,6 +17,7 @@ const CurrentWeather = ({
   description,
 }: CurrentWeatherProps) => {
   const { unit } = useWeatherSettings();
+  const { t } = useTranslation();
 
   return (
     <div className='w-full flex flex-wrap flex-col items-center sm:w-[50%]'>
@@ -31,7 +33,11 @@ const CurrentWeather = ({
         </span>
       </p>
       <div className='w-full flex justify-center text-base text-textColor select-all'>
-        <span>Feels like {FormatTemperature(feelsLike)}</span>
+        <span>
+          {t('weatherInfo.feelsLike', {
+            temperature: FormatTemperature(feelsLike),
+          })}
+        </span>
 
         <span className='text-xs'>o</span>
         {TransformUnitToChar(unit)}

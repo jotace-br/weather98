@@ -5,6 +5,7 @@ import '~/fonts/MSSansSerifBold.ttf';
 import { TaskbarProvider } from '~/providers/TaskbarProvider.tsx';
 import { WeatherSettingsProvider } from '~/providers/WeatherSettingsProvider.tsx';
 import App from './App.tsx';
+import './i18n';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

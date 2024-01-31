@@ -1,7 +1,9 @@
+import { t } from 'i18next';
 import { ReactNode, RefObject, useState } from 'react';
 import NavLinkBtn from '~/components/Button/NavLinkBtn';
 import Prompt from '~/components/Prompt/Prompt';
 import useTaskbarContext from '~/contexts/UseTaskbarContext';
+import { ChangeLanguage } from '../ChangeLanguage/ChangeLanguage';
 import HeaderActions from './HeaderActions';
 
 interface HeaderProps {
@@ -20,6 +22,7 @@ const Header = ({
   const { changeButtonState } = useTaskbarContext();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isLanguageModalVisible, setIsLanguageModalVisible] = useState(false);
 
   const handleFullscreenToggle = () => {
     if (document.fullscreenElement) {
@@ -56,16 +59,24 @@ const Header = ({
 
       {hasNavItems && (
         <nav className='flex'>
-          <NavLinkBtn text='File' />
-          <NavLinkBtn text='Edit' />
-          <NavLinkBtn text='View' />
-          <NavLinkBtn text='Help' />
+          <NavLinkBtn text={t('header.file')} />
+          <NavLinkBtn text={t('header.edit')} />
+          <NavLinkBtn
+            text={t('header.changeLang')}
+            onClick={() => setIsLanguageModalVisible(true)}
+          />
+          <NavLinkBtn text={t('header.help')} />
         </nav>
       )}
 
       {!!errorMessage && (
         <Prompt message={errorMessage} onClick={() => setErrorMessage(null)} />
       )}
+
+      <ChangeLanguage
+        open={isLanguageModalVisible}
+        onClose={() => setIsLanguageModalVisible(false)}
+      />
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { debounce } from 'lodash';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { fetchCitiesOptions } from '~/api/api';
 import searchIcon from '~/assets/Icons/SearchIcon.png';
 import Prompt from '~/components/Prompt/Prompt';
@@ -9,6 +10,8 @@ export interface SearchProps {}
 
 const Search = () => {
   const { unit, updateSelectedCity } = useWeatherSettings();
+  const { t } = useTranslation();
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState('');
 
@@ -66,7 +69,7 @@ const Search = () => {
             name='city'
             autoComplete='off'
             className='text-sm block w-full h-[30px] py-0.5 pr-1 pl-6 text-textColor leading-6 shadow-input border-1.5px border-r-white border-b-white bg-white placeholder-gray-500 focus:outline-none focus:border-transparent sm:text-[0.6875rem]'
-            placeholder='Search for location'
+            placeholder={t('searchContainer.placeholder')}
             value={searchValue}
             onChange={handleChange}
             onKeyDown={handleKeyPress}

@@ -5,10 +5,12 @@ import { ISearch } from '~/types/Search';
 export interface WeatherSettingsContextProps {
   selectedCity: SelectedCity;
   unit: Units;
+  language: string;
   recalculateTemp: (value: number) => number;
   updateSelectedCity: (city?: ISearch | null) => void;
   updateUnit: (newUnits: Units) => void;
   resetWeatherSettings: () => void;
+  changeLanguage: (lng: string) => void;
 }
 
 const WeatherSettingsContext = createContext<
