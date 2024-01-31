@@ -14,6 +14,7 @@ interface FetchWeatherProps {
   lat?: string | number;
   lon?: string | number;
   unit: string;
+  lang?: string;
 }
 
 export const fetchWeather = async ({
@@ -21,10 +22,11 @@ export const fetchWeather = async ({
   lat,
   lon,
   unit,
+  lang = 'en',
 }: FetchWeatherProps): Promise<IWeather | undefined> => {
   if (!selectedCity) return;
 
-  const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unit}&cnt=5&exclude=minutely&appid=${VITE_API_KEY}`;
+  const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unit}&lang=${lang}&cnt=5&exclude=minutely&appid=${VITE_API_KEY}`;
   const result = await fetcher<IWeather>(URL);
 
   return result;
