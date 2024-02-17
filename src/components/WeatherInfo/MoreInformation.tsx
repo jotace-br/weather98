@@ -27,7 +27,7 @@ const MoreInformation = ({
             />
             <Information
               label={t('weatherInfo.visibility')}
-              info={`${visibility || 1 / 1000} Km`}
+              info={`${(visibility || 1) / 1000} Km`}
             />
             <Information
               label={t('weatherInfo.humidity')}
