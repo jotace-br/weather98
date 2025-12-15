@@ -5,51 +5,53 @@ import { IWeather } from '~/types/Weather';
 const { VITE_API_KEY } = import.meta.env;
 
 const fetcher = async <T>(url: string): Promise<T> => {
-  const response: AxiosResponse<T> = await axios.get(url);
-  return response.data;
+	const response: AxiosResponse<T> = await axios.get(url);
+	return response.data;
 };
 
 interface FetchWeatherProps {
-  selectedCity?: ISearch | null;
-  lat?: string | number;
-  lon?: string | number;
-  unit: string;
-  lang?: string;
+	selectedCity?: ISearch | null;
+	lat?: string | number;
+	lon?: string | number;
+	unit: string;
+	lang?: string;
 }
 
 export const fetchWeather = async ({
-  selectedCity = undefined,
-  lat,
-  lon,
-  unit,
-  lang = 'en',
+	selectedCity = undefined,
+	lat,
+	lon,
+	unit,
+	lang = 'en',
 }: FetchWeatherProps): Promise<IWeather | undefined> => {
-  if (!selectedCity) return;
+	if (!selectedCity) return;
 
-  const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unit}&lang=${lang}&cnt=5&exclude=minutely&appid=${VITE_API_KEY}`;
-  const result = await fetcher<IWeather>(URL);
+	const URL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=${unit}&lang=${lang}&cnt=5&exclude=minutely&appid=${VITE_API_KEY}`;
+	const result = await fetcher<IWeather>(URL);
 
-  return result;
+	return result;
 };
 
 interface FetchCitiesOptionsProps {
-  city: string;
-  unit: string;
+	city: string;
+	unit: string;
 }
 
 export const fetchCitiesOptions = async ({
-  city,
-  unit,
+	city,
+	unit,
 }: FetchCitiesOptionsProps) => {
-  const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&units=${unit}&limit=1&appid=${VITE_API_KEY}`;
-  const results = await fetcher<ISearch[]>(URL);
+	const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&units=${unit}&limit=1&appid=${VITE_API_KEY}`;
+	const results = await fetcher<ISearch[]>(URL);
 
-  return results;
+	return results;
 };
 
 export const fetchRandomWallpaper = async () => {
-  const URL = `https://api.plaza.one/backgrounds/random`;
+	const URL = `https://api.plaza.one/backgrounds`;
 
-  const results = await fetcher<IWallpaper>(URL);
-  return results;
+	const results = await fetcher<IWallpaper[]>(URL);
+
+	const randomIndex = Math.floor(Math.random() * results.length);
+	return results[randomIndex];
 };
