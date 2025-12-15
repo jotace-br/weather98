@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
+import { allWallpapers } from '~/constants/wallpapers';
 import { ISearch } from '~/types/Search';
-import { IWallpaper } from '~/types/Wallpaper';
 import { IWeather } from '~/types/Weather';
 const { VITE_API_KEY } = import.meta.env;
 
@@ -47,11 +47,10 @@ export const fetchCitiesOptions = async ({
 	return results;
 };
 
-export const fetchRandomWallpaper = async () => {
-	const URL = `https://api.plaza.one/backgrounds`;
+export const fetchRandomWallpaper = () => {
+	// I think they blocked the API access, so using a local array of wallpapers instead
+	// const URL = `https://api.plaza.one/backgrounds/random`;
 
-	const results = await fetcher<IWallpaper[]>(URL);
-
-	const randomIndex = Math.floor(Math.random() * results.length);
-	return results[randomIndex];
+	const randomIndex = Math.floor(Math.random() * allWallpapers.length);
+	return allWallpapers[randomIndex];
 };
